@@ -1,0 +1,15 @@
+
+官网下载安装MySql
+MySql是关系型数据库
+
+
+
+终端操作MgSql
+一、如何登录数据库服务器
+   1、登录数据库
+      mysql -uroot -[密码]
+   2、如何查询数据库服务器中所有的数据库
+      show database;
+   3、如何选中某一个数据库（sushe）进行操作    
+      use sushe
+   4、
