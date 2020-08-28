@@ -207,6 +207,13 @@ MySql是关系型数据库
       insert into user10 (id,name) values(1,'zhangsan');      # √ age会填入默认值10，如果传了值就不会使用默认值
    6、外键约束
       涉及到两个表：父表，子表（主表，副表）
+      ---创建班级表
+      create table classes(
+          id int primary key,
+          name varchar(20)
+      );
+      ---创建学生表
+      create table 
    总结：
    1、添加约束的方式：
       --建表的时候就添加约束
