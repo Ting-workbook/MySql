@@ -41,20 +41,20 @@ MySql是关系型数据库
           birth DATE,
           death DATE);
    ```
-  **8、查看具体数据表“pet”的结构
+  **8、查看具体数据表“pet”的结构**
    ```
       describe pet;     (或者 desc pet;)
    ```
-  **9、往数据表中添加记录
+  **9、往数据表中添加记录**
    ```
       INSERT INTO pet
       VALUES('puffball','Diane','hamster','f','1999-03-30',NULL);
    ```
-  10、退出数据库服务器
+  **10、退出数据库服务器**
    ```
       exit;
    ```
-   11、**
+   **11、**
 
 ## 二、MySQL常用的数据类型
    MySQL支持多种类型，大致可以分为三类：数值、日期/时间和字符串（字符）类型。
