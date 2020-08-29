@@ -295,19 +295,59 @@
       insert into classes values(3,'三班');  
       insert into classes values(4,'四班'); 
    ```   
+   ```sql
+   delete from classes where id=4;    -- × 不能删除被 students 表已经引用的数据
+   ```
 **总结:**  
- * 主表 class 中没有的数据值，在副表 students 中是不可以使用的。  
- * 主表中的记录被副表引用，是不可以被删除的。  
+ * 主表（父表） class 中没有的数据值，在副表（子表） students 中是不可以使用的。  
+ * 主表（父表）中的记录被副表（子表）引用，是不可以被删除的。  
         
 **附加：**  
-  * 添加约束的方式：  
-     --建表的时候就添加约束  
-     --可以使用alter 。。。add 。。。  
-     --alter 。。。modify 。。。  
-  * 删除约束的方式：  
-     --alter 。。。drop 。。。  
-  * 查看表的结构：  
-        --desc 。。。  
+* 添加约束的方式：  
+   --建表的时候就添加约束  
+   --可以使用alter 。。。add 。。。  
+   --alter 。。。modify 。。。  
+* 删除约束的方式：  
+   --alter 。。。drop 。。。  
+* 查看表的结构：  
+   --desc 。。。
+### 数据库的三大设计范式
+1. 第一范式（1NF）  
+数据表中的所有字段都是不可分割的原子值  
+--创建一个student2表  
+```sql
+  create table student2(
+      id int primary key,
+      name varchar(20),
+      address varchar(30)
+  );
+```  
+--向student2中插入数据  
+```sql
+  insert into student2 values(1,'张三','中国四川省成都市武侯区武侯大道100号');
+  insert into student2 values(2,'李四','中国四川省成都市武侯区京城大道200号');
+  insert into student2 values(3,'王五','中国四川省成都市高新区天府大道90号');
+```
+像这种字段值还可以继续拆分的，就不满足第一范式  
+  
+--创建一个student3表
+```sql
+  create table student3(
+      id int primary key,
+      name varchar(20),
+      cuntry varchar(30),
+      privence varchar(30),
+      city varchar(30),
+      details varchar(30)
+  );
+```  
+--向student3表中插入数据
+```sql
+  insert into student3 values(1,'张三','中国','四川省','成都市','武侯区武侯大道100号');
+  insert into student3 values(2,'李四','中国','四川省','成都市','武侯区京城大道200号');
+  insert into student3 values(3,'王五','中国','四川省','成都市','高新区天府大道90号');
+```
+
 
 
 
