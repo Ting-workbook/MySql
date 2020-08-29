@@ -107,19 +107,19 @@ MySql是关系型数据库
    INSERT INTO pet VALUES('Slim','Benny','snake','m','1996-04-29',NILL);
    INSERT INTO pet VALUES('Puffball','Diane','hamster','f','1999-03-30',NILL);
    
-四、如何查看数据
+## 四、如何查看数据
    1、查看pet表中的所有记录
       select * from pet;
    2、
-五、如何删除数据
+## 五、如何删除数据
    1、删除宠物名字是Fluffy的记录
       delete from pet where name='Fluffy';
    2、
-六、如何修改数据
+## 六、如何修改数据
    1、把宠物“旺财”的名字修改成“旺旺财”
       update pet set name ='旺旺财' where owner='周星驰';
    2、
-七、MySQL建表约束
+## 七、MySQL建表约束
    1、主键约束
       它们能够唯一确定一张表中的一条记录，也就是我们通过给某个字段添加约束，就可以使得该字段不重复且不为空。
       创建一个id有主键约束的表
