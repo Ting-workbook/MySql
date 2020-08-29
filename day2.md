@@ -1,29 +1,32 @@
 
 # 终端操作MgSql
 ## 一、如何登录数据库服务器以及创建数据库，创建表，查询数据库，查询表，查询记录
-官网下载安装MySql
+官网下载安装MySql  
 MySql是关系型数据库
 ### 1、登录数据库    
    ```
       mysql -uroot -[密码]
    ```
-   2、在数据库服务器中创建数据库“test”  
+### 2、在数据库服务器中创建数据库“test”  
    ```
       create database test;
    ```  
-   3、查询数据库服务器中所有的数据库  
+### 3、查询数据库服务器中所有的数据库  
    ```
       show database;
    ```
-   4、如何选中某一个数据库（sushe）进行操作    
+### 4、如何选中某一个数据库（sushe）进行操作 
+   ```
       use sushe;
-   5、查询表（admin是数据库sushe中的一个表）中所有的记录（注：只有选中了数据库才可以查询）
+   ```
+### 5、查询表（admin是数据库sushe中的一个表）中所有的记录（注：只有选中了数据库才可以查询）
       select * from admin;
       查询admin表中Admin_ID为1的数据
       select * from admin where Admin_ID=1;
-   6、查看某个数据库中所有的数据表
+### 6、查看某个数据库中所有的数据表
       show tables;
-   7、创建一个数据表“pet”
+### 7、创建一个数据表“pet”
+   ```
       CREATE TABLE pet (
           name VARCHAR(20),
           owner VARCHAR(20),
@@ -31,12 +34,13 @@ MySql是关系型数据库
           sex CHAR(10),
           birth DATE,
           death DATE);
-   8、查看具体数据表“pet”的结构
+   ```
+### 8、查看具体数据表“pet”的结构
       describe pet;     (或者 desc pet;)
-   9、往数据表中添加记录
+### 9、往数据表中添加记录
       INSERT INTO pet
       VALUES('puffball','Diane','hamster','f','1999-03-30',NULL);
-   10、退出数据库服务器
+### 10、退出数据库服务器
       exit;
    11、
 
