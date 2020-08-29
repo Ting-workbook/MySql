@@ -1,8 +1,8 @@
 
 # 终端操作MgSql
 ## 一、如何登录数据库服务器以及创建数据库，创建表，查询数据库，查询表，查询记录
-官网下载安装MySql  
-MySql是关系型数据库  
+> 官网下载安装MySql  
+> MySql是关系型数据库  
   **1、登录数据库**    
    ```
       mysql -uroot -[密码]
@@ -144,9 +144,9 @@ MySql是关系型数据库
    **2、**
 ## 七、MySQL建表约束  
    **1、主键约束**  
-      它们能够唯一确定一张表中的一条记录，也就是我们通过给某个字段添加约束，就可以使得该字段不重复且不为空。  
-      创建一个id有主键约束的表    
-      ```
+   >  它们能够唯一确定一张表中的一条记录，也就是我们通过给某个字段添加约束，就可以使得该字段不重复且不为空。  
+   >  创建一个id有主键约束的表    
+     ```
       create table user(
           id int primary key,
           name varchar(20)
@@ -155,8 +155,8 @@ MySql是关系型数据库
       insert into user values(1,'张三');         # × 这里会报错，因为“1”只能插入一次，因为“id”是主键
       insert into user values(2,'张三');         # √ 改成这样就没有问题了
       insert into user values(NULL,'张三');      # × 这里也会报错，因为主键内容不可为空
-      ```  
-      创建一个id和name有联合主键约束的表    
+     ``` 
+    > 创建一个id和name有联合主键约束的表    
       ```
       create table user2(
           id int,
@@ -171,8 +171,8 @@ MySql是关系型数据库
       insert into user2 values(NULL,'李四','123');     # × 联合主键不能为空
       ```  
    **2、自增约束**  
-      自增约束和逐渐约束搭配使用可以自动帮助我们管控主键的值，让它自动增长。   
-      创建一个user3表，id作为自增约束  
+   >  自增约束和逐渐约束搭配使用可以自动帮助我们管控主键的值，让它自动增长。   
+   >  创建一个user3表，id作为自增约束  
       ```
       create table user3(
           id int primary key auto-increment,
@@ -181,15 +181,15 @@ MySql是关系型数据库
       insert into user3 (name) values('zhangsan');       # 插入一个“zhangsan”可以自动生成一个id值为1
       insert into user3 (name) values('zhangsan');       # 插入一个“zhangsan”可以自动生成一个id值为2
       ```  
-      如果创建表的时候忘记创建主键约束了，该怎么办？  
+   >  如果创建表的时候忘记创建主键约束了，该怎么办？  
       ```
-      create table user4(
-          id int,
-          name varchar(20)
-      );
-      alter table user4 add primary key(id);             # 给表user4增加一个主键  （注：alter table 是修改表结构）
-      alter table user4 drop primary key;                # 删除主键  （注：drop 是删除）
-      alter table user4 modify id int primary key;       # 通过修改字段的方式添加主键  （注：modify 是修改字段）
+    >  create table user4(
+    >      id int,
+    >      name varchar(20)
+    >  );
+    >  alter table user4 add primary key(id);             # 给表user4增加一个主键  （注：alter table 是修改表结构）
+    >  alter table user4 drop primary key;                # 删除主键  （注：drop 是删除）
+    >  alter table user4 modify id int primary key;       # 通过修改字段的方式添加主键  （注：modify 是修改字段）
       ```  
    **3、唯一约束**  
       约束修饰的字段的值不可以重复（可以为空）  
