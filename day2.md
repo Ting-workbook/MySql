@@ -194,7 +194,7 @@
    **3、唯一约束**  
       约束修饰的字段的值不可以重复（可以为空）  
       创建一个user5，再对name添加一个唯一约束  
-      ```
+      ```sql
       create table user5(
           id int,
           name varchar(20)
@@ -205,7 +205,7 @@
       insert into user5 values(1,'lisi');          # √ 
       ```  
       创建一个user6，在创建的时候直接对name添加唯一约束  
-      ```
+      ```sql
       create table user6(
           id int,
           name varchar(20),
@@ -213,14 +213,14 @@
       );
       ```
       创建一个user7，在创建的时候直接对name添加唯一约束  
-      ```
+      ```sql
       create table user7(
           id int,
           name varchar(20) unique          # 直接添加唯一约束
       );
       ```  
       创建一个user8，在创建的时候直接对id和name添加唯一约束  
-      ```
+      ```sql
       create table user8(
           id int,
           name varchar(20),
@@ -232,11 +232,11 @@
       insert into user8 values(1,'lisi');           # √
       ```  
       删除唯一约束  
-      ```
+      ```sql
       alter table user7 drop index name;
       ```
       通过modify的形式添加唯一约束  
-      ```
+      ```sql
       alter table user7 modify name varchar(20) unique;
       ```  
    **4、非空约束**  
