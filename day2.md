@@ -239,9 +239,9 @@
       alter table user7 modify name varchar(20) unique;
      
    ### 4、非空约束 ### 
-      修饰的字段不能为空NULL  
-      1. 创建表user9，name值设置非空约束  
-      
+   修饰的字段不能为空NULL  
+   1. 创建表user9，name值设置非空约束  
+   ```sql   
       create table user9(
           id int,
           name varchar(20) not null      -- 直接添加非空约束
@@ -249,51 +249,51 @@
       insert into user9 (id) values(1);           -- × name有非空约束，且没有设默认值，传值的时候又没有给一个值所以会报错
       insert into user9 values(1,'张三');         -- √
       insert into user9 (name) values('lisi');    -- √
-       
+   ```    
    ### 5、默认约束 ### 
-      当我们插入字段值的时候如果没有传值就会使用默认值  
-      1. 创建表user10，对age使用默认约束  
-      
+   当我们插入字段值的时候如果没有传值就会使用默认值  
+   1. 创建表user10，对age使用默认约束  
+   ```sql   
       create table user10(
           id int,
           name varchar(20)，
           age int default 10
       );
       insert into user10 (id,name) values(1,'zhangsan');      -- √ age会填入默认值10，如果传了值就不会使用默认值
-      
+   ```  
    ### 6、外键约束 ###   
-      涉及到两个表：父表，子表（主表，副表）  
-      1. ---创建班级表  
-      
+   涉及到两个表：父表，子表（主表，副表）  
+   1. ---创建班级表  
+   ```sql  
       create table classes(
           id int primary key,
           name varchar(20)
       );
-      
-      2. ---创建学生表  
-      
+   ```   
+   2. ---创建学生表  
+   ```sql   
       create table students(  
           id int primary key,  
           name varchar(20),  
           class_id int,  
           foreign key (class_id) references classes(id)    -- students表里的class_id的值必须来自于classes表里的id字段   
       );  
-        
-      --向students表中插入数据  
-        
+   ```     
+   3. --向students表中插入数据  
+   ``` sql   
        insert into students values(1001,'张三',1);  
        insert into students values(1002,'张三',2);  
        insert into students values(1003,'张三',3);  
        insert into students values(1004,'张三',4);  
        insert into students values(1005,'李四',5);    -- × 外键约束失败，主表 class 中没有的数据值，在副表 students 中是不可以使用的。
-        
-      --向classes表中插入数据  
-        
+   ```   
+   4. --向classes表中插入数据  
+   ```sql    
       insert into classes values(1,'一班');  
       insert into classes values(2,'二班');  
       insert into classes values(3,'三班');  
       insert into classes values(4,'四班'); 
-      
+  ```   
    **总结**  
  * 主表 class 中没有的数据值，在副表 students 中是不可以使用的。  
  * 主表中的记录被副表引用，是不可以被删除的。  
