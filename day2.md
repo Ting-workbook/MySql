@@ -4,35 +4,35 @@
  官网下载安装MySql  
  MySql是关系型数据库  
   1. 登录数据库    
-   ```
+   ```sql
       mysql -uroot -[密码]
    ```
   2. 在数据库服务器中创建数据库“test”  
-   ```
+   ```sql
       create database test;
    ```  
   3. 查询数据库服务器中所有的数据库 
-   ```
+   ```sql
       show database;
    ```
   4. 如何选中某一个数据库（sushe）进行操作  
-   ```
+   ```sql
       use sushe;
    ```
   5. 查询表（admin是数据库sushe中的一个表）中所有的记录（注：只有选中了数据库才可以查询）
-   ```
+   ```sql
       select * from admin;
    ```
      查询admin表中Admin_ID为1的数据  
-   ```
+   ```sql
       select * from admin where Admin_ID=1;
    ```
  6. 查看某个数据库中所有的数据表 
-   ```
+   ```sql
       show tables;
    ```
  7. 创建一个数据表“pet”
-   ```
+   ```sql
       CREATE TABLE pet (
           name VARCHAR(20),
           owner VARCHAR(20),
@@ -42,16 +42,16 @@
           death DATE);
    ```
 8. 查看具体数据表“pet”的结构
-   ```
+   ```sql
       describe pet;     (或者 desc pet;)
    ```
 9. 往数据表中添加记录
-   ```
+   ```sql
       INSERT INTO pet
       VALUES('puffball','Diane','hamster','f','1999-03-30',NULL);
    ```
 10. 退出数据库服务器
-   ```
+   ```sql
       exit;
    ```
 
@@ -110,7 +110,7 @@
    +---------------+-------------+-------------+---------+-----------------+------------------+  
  ```
      
-   ```
+   ```sql
    INSERT INTO pet VALUES('Fluffy','Harold','cat','f','1993-02-04',NILL);
    INSERT INTO pet VALUES('Claws','Gwen','cat','m','1994-03-17',NILL);
    INSERT INTO pet VALUES('Buffy','Harold','dog','f','1989-05-13',NILL);
@@ -125,27 +125,27 @@
    
 ## 四、如何查看数据
    **1、查看pet表中的所有记录**
-   ```
+   ```sql
       select * from pet;
    ```
    **2、**
 ## 五、如何删除数据  
    **1、删除宠物名字是Fluffy的记录**  
-   ```
+   ```sql
       delete from pet where name='Fluffy';
    ```
    2、
 ## 六、如何修改数据
    **1、把宠物“旺财”的名字修改成“旺旺财”**  
-   ```
+   ```sql
       update pet set name ='旺旺财' where owner='周星驰';
    ```   
    **2、**
 ## 七、MySQL建表约束  
    ### 1、主键约束 ###  
-     它们能够唯一确定一张表中的一条记录，也就是我们通过给某个字段添加约束，就可以使得该字段不重复且不为空。  
-     1. 创建一个id有主键约束的表    
-     
+   它们能够唯一确定一张表中的一条记录，也就是我们通过给某个字段添加约束，就可以使得该字段不重复且不为空。  
+   1. 创建一个id有主键约束的表    
+    ```sql 
       create table user(  
           id int primary key,  
           name varchar(20)  
@@ -154,9 +154,9 @@
       insert into user values(1,'张三');         -- × 这里会报错，因为“1”只能插入一次，因为“id”是主键  
       insert into user values(2,'张三');         -- √ 改成这样就没有问题了  
       insert into user values(NULL,'张三');      -- × 这里也会报错，因为主键内容不可为空  
-     
-     2. 创建一个id和name有联合主键约束的表    
-      
+    ``` 
+    2. 创建一个id和name有联合主键约束的表    
+    ```sql  
       create table user2(
           id int,
           name varchar(20),
@@ -168,20 +168,20 @@
       insert into user2 values(2,'张三','123');        -- √ 联合主键值只要两个加起来不重复就行
       insert into user2 values(1,'李四','123');        -- √ 联合主键值只要两个加起来不重复就行
       insert into user2 values(NULL,'李四','123');     -- × 联合主键不能为空
-     
+   ```  
   ### 2、自增约束 ###  
-     自增约束和逐渐约束搭配使用可以自动帮助我们管控主键的值，让它自动增长。   
-     1. 创建一个user3表，id作为自增约束  
-     
+  自增约束和逐渐约束搭配使用可以自动帮助我们管控主键的值，让它自动增长。   
+  1. 创建一个user3表，id作为自增约束  
+   ```sql  
       create table user3(
           id int primary key auto-increment,
           name varchar(20)
       );
       insert into user3 (name) values('zhangsan');       -- 插入一个“zhangsan”可以自动生成一个id值为1
       insert into user3 (name) values('zhangsan');       -- 插入一个“zhangsan”可以自动生成一个id值为2
-       
-     2. 如果创建表的时候忘记创建主键约束了，该怎么办？  
-      
+   ```    
+   2. 如果创建表的时候忘记创建主键约束了，该怎么办？  
+   ```sql   
       create table user4(
           id int,
           name varchar(20)
@@ -189,11 +189,11 @@
       alter table user4 add primary key(id);             -- 给表user4增加一个主键  （注：alter table 是修改表结构）
       alter table user4 drop primary key;                -- 删除主键  （注：drop 是删除）
       alter table user4 modify id int primary key;       -- 通过修改字段的方式添加主键  （注：modify 是修改字段）
-      
+   ```   
    ### 3、唯一约束 ### 
-      约束修饰的字段的值不可以重复（可以为空）  
-      1. 创建一个user5，再对name添加一个唯一约束  
-     
+   约束修饰的字段的值不可以重复（可以为空）  
+   1. 创建一个user5，再对name添加一个唯一约束  
+    ```sql 
       create table user5(
           id int,
           name varchar(20)
@@ -202,8 +202,8 @@
       insert into user5 values(1,'zhangsan');      -- √
       insert into user5 values(1,'zhangsan');      -- × “zhangsan”重复了
       insert into user5 values(1,'lisi');          -- √ 
-       
-      2. 创建一个user6，在创建的时候直接对name添加唯一约束  
+    ```    
+   2. 创建一个user6，在创建的时候直接对name添加唯一约束  
       
       create table user6(
           id int,
@@ -218,7 +218,7 @@
           name varchar(20) unique          -- 直接添加唯一约束
       );
       
-      4. 创建一个user8，在创建的时候直接对id和name添加唯一约束  
+   4. 创建一个user8，在创建的时候直接对id和name添加唯一约束  
      
       create table user8(
           id int,
@@ -230,17 +230,17 @@
       insert into user8 values(2,'zhangsan');       -- √
       insert into user8 values(1,'lisi');           -- √
       
-      5. 删除唯一约束  
+   5. 删除唯一约束  
       
       alter table user7 drop index name;
      
-      6. 通过modify的形式添加唯一约束  
-      
+   6. 通过modify的形式添加唯一约束  
+    ```  
       alter table user7 modify name varchar(20) unique;
-     
-   ### 4、非空约束 ### 
-   修饰的字段不能为空NULL  
-   1. 创建表user9，name值设置非空约束  
+    ``` 
+  ### 4、非空约束 ### 
+  修饰的字段不能为空NULL  
+  1. 创建表user9，name值设置非空约束  
    ```sql   
       create table user9(
           id int,
