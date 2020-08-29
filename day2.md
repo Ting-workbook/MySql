@@ -272,7 +272,13 @@
       
       2. ---创建学生表  
       
-      create table 
+      create table students(  
+          id int primary key,  
+          name varchar(20),  
+          class_id int,  
+          foreign key (class_id) references classes(id)    -- students表里的class_id的值必须来自于classes表里的id字段   
+      );  
+      
       
    **总结：**  
       a、添加约束的方式：  
