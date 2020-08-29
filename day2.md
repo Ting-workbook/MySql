@@ -143,7 +143,7 @@ MySql是关系型数据库
    ```   
    2、
 ## 七、MySQL建表约束  
-   1、主键约束  
+   **1、主键约束**  
       它们能够唯一确定一张表中的一条记录，也就是我们通过给某个字段添加约束，就可以使得该字段不重复且不为空。  
       创建一个id有主键约束的表    
       ```
@@ -170,7 +170,7 @@ MySql是关系型数据库
       insert into user2 values(1,'李四','123');        # √ 联合主键值只要两个加起来不重复就行
       insert into user2 values(NULL,'李四','123');     # × 联合主键不能为空
       ```  
-   2、自增约束  
+   **2、自增约束**  
       自增约束和逐渐约束搭配使用可以自动帮助我们管控主键的值，让它自动增长。   
       创建一个user3表，id作为自增约束  
       ```
@@ -191,7 +191,7 @@ MySql是关系型数据库
       alter table user4 drop primary key;                # 删除主键  （注：drop 是删除）
       alter table user4 modify id int primary key;       # 通过修改字段的方式添加主键  （注：modify 是修改字段）
       ```  
-   3、唯一约束  
+   **3、唯一约束**  
       约束修饰的字段的值不可以重复（可以为空）  
       创建一个user5，再对name添加一个唯一约束  
       ```
@@ -239,7 +239,7 @@ MySql是关系型数据库
       ```
       alter table user7 modify name varchar(20) unique;
       ```  
-   4、非空约束  
+   **4、非空约束**  
       修饰的字段不能为空NULL  
       创建表user9，name值设置非空约束  
       ```
@@ -251,7 +251,7 @@ MySql是关系型数据库
       insert into user9 values(1,'张三');         # √
       insert into user9 (name) values('lisi');    # √
       ```  
-   5、默认约束  
+   **5、默认约束**  
       当我们插入字段值的时候如果没有传值就会使用默认值  
       创建表user10，对age使用默认约束  
       ```
@@ -262,7 +262,7 @@ MySql是关系型数据库
       );
       insert into user10 (id,name) values(1,'zhangsan');      # √ age会填入默认值10，如果传了值就不会使用默认值
       ```   
-   6、外键约束  
+   **6、外键约束**  
       涉及到两个表：父表，子表（主表，副表）  
       ---创建班级表  
       ```
