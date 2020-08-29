@@ -120,7 +120,6 @@
    INSERT INTO pet VALUES('Whistler','Gwen','bird','NULL,'1997-12-09',NILL);
    INSERT INTO pet VALUES('Slim','Benny','snake','m','1996-04-29',NILL);
    INSERT INTO pet VALUES('Puffball','Diane','hamster','f','1999-03-30',NILL);
-   
    ```
    
 ## 四、如何查看数据
@@ -145,7 +144,7 @@
    ### 1、主键约束 ###  
    它们能够唯一确定一张表中的一条记录，也就是我们通过给某个字段添加约束，就可以使得该字段不重复且不为空。  
    1. 创建一个id有主键约束的表    
-    ```sql 
+    ``` 
       create table user(  
           id int primary key,  
           name varchar(20)  
@@ -193,7 +192,7 @@
    ### 3、唯一约束 ### 
    约束修饰的字段的值不可以重复（可以为空）  
    1. 创建一个user5，再对name添加一个唯一约束  
-    ```sql 
+   
       create table user5(
           id int,
           name varchar(20)
@@ -202,7 +201,7 @@
       insert into user5 values(1,'zhangsan');      -- √
       insert into user5 values(1,'zhangsan');      -- × “zhangsan”重复了
       insert into user5 values(1,'lisi');          -- √ 
-    ```    
+     
    2. 创建一个user6，在创建的时候直接对name添加唯一约束  
       
       create table user6(
@@ -235,9 +234,9 @@
       alter table user7 drop index name;
      
    6. 通过modify的形式添加唯一约束  
-    ```  
+      
       alter table user7 modify name varchar(20) unique;
-    ``` 
+   
   ### 4、非空约束 ### 
   修饰的字段不能为空NULL  
   1. 创建表user9，name值设置非空约束  
