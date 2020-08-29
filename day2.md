@@ -130,8 +130,8 @@ MySql是关系型数据库
       select * from pet;
    ```
    **2、**
-## 五、如何删除数据
-   **1、删除宠物名字是Fluffy的记录 **  
+## 五、如何删除数据  
+   **1、删除宠物名字是Fluffy的记录**  
    ```
       delete from pet where name='Fluffy';
    ```
