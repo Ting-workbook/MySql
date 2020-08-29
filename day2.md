@@ -192,7 +192,7 @@
    ### 3、唯一约束 ### 
    约束修饰的字段的值不可以重复（可以为空）  
    1. 创建一个user5，再对name添加一个唯一约束  
-   
+   ```sql
       create table user5(
           id int,
           name varchar(20)
@@ -201,41 +201,43 @@
       insert into user5 values(1,'zhangsan');      -- √
       insert into user5 values(1,'zhangsan');      -- × “zhangsan”重复了
       insert into user5 values(1,'lisi');          -- √ 
-     
-   2. 创建一个user6，在创建的时候直接对name添加唯一约束  
-      
+   ```  
+   2. 创建一个user6，在创建的时候直接对name添加唯一约束   
+   
+    ```sql  
       create table user6(
           id int,
           name varchar(20),
           unique(name)              -- 添加唯一约束
       );
-     
-      3. 创建一个user7，在创建的时候直接对name添加唯一约束  
-      
-      create table user7(
-          id int,
-          name varchar(20) unique          -- 直接添加唯一约束
-      );
-      
+    ``` 
+    
+   3. 创建一个user7，在创建的时候直接对name添加唯一约束   
+    
+      create table user7(  
+          id int,   
+          name varchar(20) unique          -- 直接添加唯一约束    
+      );  
+   
    4. 创建一个user8，在创建的时候直接对id和name添加唯一约束  
      
-      create table user8(
-          id int,
-          name varchar(20),
-          unique(id,name)              -- 对id和name添加唯一约束   （注：两个组合在一不重复就行）
-      );
-      insert into user8 values(1,'zhangsan');       -- √
-      insert into user8 values(1,'zhangsan');       -- ×
-      insert into user8 values(2,'zhangsan');       -- √
-      insert into user8 values(1,'lisi');           -- √
-      
+      create table user8(  
+          id int,  
+          name varchar(20),  
+          unique(id,name)              -- 对id和name添加唯一约束   （注：两个组合在一不重复就行）  
+      );  
+      insert into user8 values(1,'zhangsan');       -- √    
+      insert into user8 values(1,'zhangsan');       -- ×  
+      insert into user8 values(2,'zhangsan');       -- √  
+      insert into user8 values(1,'lisi');           -- √  
+        
    5. 删除唯一约束  
       
-      alter table user7 drop index name;
+      alter table user7 drop index name;  
      
    6. 通过modify的形式添加唯一约束  
       
-      alter table user7 modify name varchar(20) unique;
+      alter table user7 modify name varchar(20) unique;  
    
   ### 4、非空约束 ### 
   修饰的字段不能为空NULL  
