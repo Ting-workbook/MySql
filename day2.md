@@ -144,9 +144,9 @@
    **2、**
 ## 七、MySQL建表约束  
    **1、主键约束**  
-   >  它们能够唯一确定一张表中的一条记录，也就是我们通过给某个字段添加约束，就可以使得该字段不重复且不为空。  
-   >  创建一个id有主键约束的表    
-     ```
+     它们能够唯一确定一张表中的一条记录，也就是我们通过给某个字段添加约束，就可以使得该字段不重复且不为空。  
+     创建一个id有主键约束的表    
+     >```
       create table user(
           id int primary key,
           name varchar(20)
@@ -155,8 +155,8 @@
       insert into user values(1,'张三');         # × 这里会报错，因为“1”只能插入一次，因为“id”是主键
       insert into user values(2,'张三');         # √ 改成这样就没有问题了
       insert into user values(NULL,'张三');      # × 这里也会报错，因为主键内容不可为空
-     ``` 
-    > 创建一个id和name有联合主键约束的表    
+     >``` 
+     创建一个id和name有联合主键约束的表    
       ```
       create table user2(
           id int,
