@@ -146,18 +146,18 @@
    **1、主键约束**  
      它们能够唯一确定一张表中的一条记录，也就是我们通过给某个字段添加约束，就可以使得该字段不重复且不为空。  
      创建一个id有主键约束的表    
-     ```
+     ```sql
       create table user(  
           id int primary key,  
           name varchar(20)  
       );  
       insert into user values(1,'张三');  
-      insert into user values(1,'张三');         # × 这里会报错，因为“1”只能插入一次，因为“id”是主键  
-      insert into user values(2,'张三');         # √ 改成这样就没有问题了  
-      insert into user values(NULL,'张三');      # × 这里也会报错，因为主键内容不可为空  
+      insert into user values(1,'张三');         -- × 这里会报错，因为“1”只能插入一次，因为“id”是主键  
+      insert into user values(2,'张三');         -- √ 改成这样就没有问题了  
+      insert into user values(NULL,'张三');      -- × 这里也会报错，因为主键内容不可为空  
      ``` 
      创建一个id和name有联合主键约束的表    
-      ```
+      ```sql
       create table user2(
           id int,
           name varchar(20),
@@ -165,10 +165,10 @@
           primary key(id,name)
       );
       insert into user2 values(1,'张三','123');
-      insert into user2 values(1,'张三','123');        # × 主键不能重复
-      insert into user2 values(2,'张三','123');        # √ 联合主键值只要两个加起来不重复就行
-      insert into user2 values(1,'李四','123');        # √ 联合主键值只要两个加起来不重复就行
-      insert into user2 values(NULL,'李四','123');     # × 联合主键不能为空
+      insert into user2 values(1,'张三','123');        -- × 主键不能重复
+      insert into user2 values(2,'张三','123');        -- √ 联合主键值只要两个加起来不重复就行
+      insert into user2 values(1,'李四','123');        -- √ 联合主键值只要两个加起来不重复就行
+      insert into user2 values(NULL,'李四','123');     -- × 联合主键不能为空
       ```  
    **2、自增约束**  
      自增约束和逐渐约束搭配使用可以自动帮助我们管控主键的值，让它自动增长。   
@@ -178,19 +178,19 @@
           id int primary key auto-increment,
           name varchar(20)
       );
-      insert into user3 (name) values('zhangsan');       # 插入一个“zhangsan”可以自动生成一个id值为1
-      insert into user3 (name) values('zhangsan');       # 插入一个“zhangsan”可以自动生成一个id值为2
+      insert into user3 (name) values('zhangsan');       -- 插入一个“zhangsan”可以自动生成一个id值为1
+      insert into user3 (name) values('zhangsan');       -- 插入一个“zhangsan”可以自动生成一个id值为2
       ```  
      如果创建表的时候忘记创建主键约束了，该怎么办？  
-      >
+      ```sql
       create table user4(
           id int,
           name varchar(20)
       );
-      alter table user4 add primary key(id);             # 给表user4增加一个主键  （注：alter table 是修改表结构）
-      alter table user4 drop primary key;                # 删除主键  （注：drop 是删除）
-      alter table user4 modify id int primary key;       # 通过修改字段的方式添加主键  （注：modify 是修改字段）
-      >  
+      alter table user4 add primary key(id);             -- 给表user4增加一个主键  （注：alter table 是修改表结构）
+      alter table user4 drop primary key;                -- 删除主键  （注：drop 是删除）
+      alter table user4 modify id int primary key;       -- 通过修改字段的方式添加主键  （注：modify 是修改字段）
+      ```   
    **3、唯一约束**  
       约束修饰的字段的值不可以重复（可以为空）  
       创建一个user5，再对name添加一个唯一约束  
@@ -199,24 +199,24 @@
           id int,
           name varchar(20)
       );
-      alter table user5 add unique(name);          # 添加一个唯一约束
-      insert into user5 values(1,'zhangsan');      # √
-      insert into user5 values(1,'zhangsan');      # × “zhangsan”重复了
-      insert into user5 values(1,'lisi');          # √ 
+      alter table user5 add unique(name);          -- 添加一个唯一约束
+      insert into user5 values(1,'zhangsan');      -- √
+      insert into user5 values(1,'zhangsan');      -- × “zhangsan”重复了
+      insert into user5 values(1,'lisi');          -- √ 
       ```  
       创建一个user6，在创建的时候直接对name添加唯一约束  
       ```sql
       create table user6(
           id int,
           name varchar(20),
-          unique(name)              # 添加唯一约束
+          unique(name)              -- 添加唯一约束
       );
       ```
       创建一个user7，在创建的时候直接对name添加唯一约束  
       ```sql
       create table user7(
           id int,
-          name varchar(20) unique          # 直接添加唯一约束
+          name varchar(20) unique          -- 直接添加唯一约束
       );
       ```  
       创建一个user8，在创建的时候直接对id和name添加唯一约束  
@@ -224,12 +224,12 @@
       create table user8(
           id int,
           name varchar(20),
-          unique(id,name)              # 对id和name添加唯一约束   （注：两个组合在一不重复就行）
+          unique(id,name)              -- 对id和name添加唯一约束   （注：两个组合在一不重复就行）
       );
-      insert into user8 values(1,'zhangsan');       # √
-      insert into user8 values(1,'zhangsan');       # ×
-      insert into user8 values(2,'zhangsan');       # √
-      insert into user8 values(1,'lisi');           # √
+      insert into user8 values(1,'zhangsan');       -- √
+      insert into user8 values(1,'zhangsan');       -- ×
+      insert into user8 values(2,'zhangsan');       -- √
+      insert into user8 values(1,'lisi');           -- √
       ```  
       删除唯一约束  
       ```sql
@@ -242,37 +242,37 @@
    **4、非空约束**  
       修饰的字段不能为空NULL  
       创建表user9，name值设置非空约束  
-      ```
+      ```sql
       create table user9(
           id int,
-          name varchar(20) not null      # 直接添加非空约束
+          name varchar(20) not null      -- 直接添加非空约束
       );
-      insert into user9 (id) values(1);           # × name有非空约束，且没有设默认值，传值的时候又没有给一个值所以会报错
-      insert into user9 values(1,'张三');         # √
-      insert into user9 (name) values('lisi');    # √
+      insert into user9 (id) values(1);           -- × name有非空约束，且没有设默认值，传值的时候又没有给一个值所以会报错
+      insert into user9 values(1,'张三');         -- √
+      insert into user9 (name) values('lisi');    -- √
       ```  
    **5、默认约束**  
       当我们插入字段值的时候如果没有传值就会使用默认值  
       创建表user10，对age使用默认约束  
-      ```
+      ```sql
       create table user10(
           id int,
           name varchar(20)，
           age int default 10
       );
-      insert into user10 (id,name) values(1,'zhangsan');      # √ age会填入默认值10，如果传了值就不会使用默认值
+      insert into user10 (id,name) values(1,'zhangsan');      -- √ age会填入默认值10，如果传了值就不会使用默认值
       ```   
    **6、外键约束**  
       涉及到两个表：父表，子表（主表，副表）  
       ---创建班级表  
-      ```
+      ```sql
       create table classes(
           id int primary key,
           name varchar(20)
       );
       ```  
       ---创建学生表  
-      ```
+      ```sql
       create table 
       ```  
    **总结：**  
