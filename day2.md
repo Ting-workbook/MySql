@@ -83,20 +83,21 @@ MySql是关系型数据库
     数据类型如何选择？   日期选择拿着格式，数值和字符串按照大小！
    
 ## 三、如何插入下列数据表？
-   +---------------+-------------+-------------+---------+-----------------+------------------+
-   |  name         |  owner      |  species    |  sex    |  birth          |  death           |
-   +---------------+-------------+-------------+---------+-----------------+------------------+
-   |  Fluffy       |  Harold     |  cat        |  f      |  1993-02-04     |  NULL            |
-   |  Claws        |  Gwen       |  cat        |  m      |  1994-03-17     |  NULL            |
-   |  Buffy        |  Harold     |  dog        |  f      |  1989-05-13     |  NULL            |
-   |  Fang         |  Benny      |  dog        |  m      |  1990-08-27     |  NULL            |
-   |  Bowser       |  Diane      |  dog        |  m      |  1979-08-31     |  1995-07-29      |
-   |  Chirpy       |  Gwen       |  bird       |  f      |  1998-09-11     |  NULL            |
-   |  Whistler     |  Gwen       |  bird       |  NULL   |  1997-12-09     |  NULL            |
-   |  Slim         |  Benny      |  snake      |  m      |  1996-04-29     |  NULL            |
-   |  Puffball     |  Diane      |  hamster    |  f      |  1999-03-30     |  NULL            |
-   +---------------+-------------+-------------+---------+-----------------+------------------+
-   
+   +---------------+-------------+-------------+---------+-----------------+------------------+  
+   |  name         |  owner      |  species    |  sex    |  birth          |  death           |  
+   +---------------+-------------+-------------+---------+-----------------+------------------+  
+   |  Fluffy       |  Harold     |  cat        |  f      |  1993-02-04     |  NULL            |  
+   |  Claws        |  Gwen       |  cat        |  m      |  1994-03-17     |  NULL            |  
+   |  Buffy        |  Harold     |  dog        |  f      |  1989-05-13     |  NULL            |  
+   |  Fang         |  Benny      |  dog        |  m      |  1990-08-27     |  NULL            |  
+   |  Bowser       |  Diane      |  dog        |  m      |  1979-08-31     |  1995-07-29      |  
+   |  Chirpy       |  Gwen       |  bird       |  f      |  1998-09-11     |  NULL            |  
+   |  Whistler     |  Gwen       |  bird       |  NULL   |  1997-12-09     |  NULL            |  
+   |  Slim         |  Benny      |  snake      |  m      |  1996-04-29     |  NULL            |  
+   |  Puffball     |  Diane      |  hamster    |  f      |  1999-03-30     |  NULL            |  
+   +---------------+-------------+-------------+---------+-----------------+------------------+  
+     
+   ```
    INSERT INTO pet VALUES('Fluffy','Harold','cat','f','1993-02-04',NILL);
    INSERT INTO pet VALUES('Claws','Gwen','cat','m','1994-03-17',NILL);
    INSERT INTO pet VALUES('Buffy','Harold','dog','f','1989-05-13',NILL);
@@ -106,6 +107,8 @@ MySql是关系型数据库
    INSERT INTO pet VALUES('Whistler','Gwen','bird','NULL,'1997-12-09',NILL);
    INSERT INTO pet VALUES('Slim','Benny','snake','m','1996-04-29',NILL);
    INSERT INTO pet VALUES('Puffball','Diane','hamster','f','1999-03-30',NILL);
+   
+   ```
    
 ## 四、如何查看数据
    1、查看pet表中的所有记录
