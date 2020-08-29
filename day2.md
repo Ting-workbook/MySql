@@ -278,8 +278,26 @@
           class_id int,  
           foreign key (class_id) references classes(id)    -- students表里的class_id的值必须来自于classes表里的id字段   
       );  
+        
+      --向students表中插入数据  
+        
+       insert into students values(1001,'张三',1);  
+       insert into students values(1002,'张三',2);  
+       insert into students values(1003,'张三',3);  
+       insert into students values(1004,'张三',4);  
+       insert into students values(1005,'李四',5);    -- × 外键约束失败，主表 class 中没有的数据值，在副表 students 中是不可以使用的。
+        
+      --向classes表中插入数据  
+        
+      insert into classes values(1,'一班');  
+      insert into classes values(2,'二班');  
+      insert into classes values(3,'三班');  
+      insert into classes values(4,'四班'); 
       
-      
+   **总结**  
+      + 主表 class 中没有的数据值，在副表 students 中是不可以使用的。  
+      + 主表中的记录被副表引用，是不可以被删除的。  
+        
    **总结：**  
       a、添加约束的方式：  
          --建表的时候就添加约束  
