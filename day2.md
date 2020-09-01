@@ -365,13 +365,13 @@
 这里出现的问题：  
 ————除主键以外的其他列，只依赖于主键的部分字段。（比如这里的product_name只依赖于product_id）  
    
-如何解决：
-————拆表
+解决方案：  
+————拆表  
 ```sql
   create table myorder(
       order_id int primary key,
       product_id int,
-      customer_id int,
+      customer_id int
   );
   
   create table product(
@@ -384,9 +384,32 @@
       name varchar(20)
   );
 ```  
-————分成三个表之后，就满足了第二范式的设计！
-
-
+————分成三个表之后，就满足了第二范式的设计！  
+   
+3. 第三范式（3NF）  
+必须先满足第二范式，除开主键列的其他列之间不能有传递依赖关系。  
+```sql
+  create table myorder(
+      order_id int primary key,
+      product_id int,
+      customer_id int,
+      customer_phone varchar(15)
+  );
+```
+解决方案：  
+————拆表  
+```sql
+  create table myorder(
+      order_id int primary key,
+      product_id int,
+      customer_id int
+  );
+  create table customer(
+      id int primary key,
+      name varchar(20),
+      phone varchar(15)
+  );
+```
 
 
    
