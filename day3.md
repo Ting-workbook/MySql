@@ -1,6 +1,6 @@
 ## 八、查询练习  
 ** 学生表 **  
-```
+ ```
 Student  
 学号   
 姓名   
@@ -111,10 +111,54 @@ Score
   insert into score values('103','6-166','85');
   insert into score values('105','6-166','79');
   insert into score values('109','6-166','81');
-```
+```  
+   
+   
 1. 查询学生表里的所有记录
 ```sql
   select * from student;
 ```
-2. 查询student表中的所有记录的sname、ssex和class列
+2. 查询student表中的所有记录的sname、ssex和class列  
+```sql
+  select sname, ssex, class from student;
+```
+3. 查询教师所有的单位即不重复的depart列
+```sql
+  select distinct depart from teacher;     -- detinct是排除重复的
+```
+4. 查询score表中成绩在60到80之间的所有记录  
+```sql
+  select * from score where degree between 60 and 80;     -- between。。。and。。。是查询区间
+```
+```sql
+  select * from score where degree > 60 and degree < 80;       -- 直接使用运算符比较
+```
+5. 查询score表中成绩为85，86或88的记录
+```sql
+  select * from score where degree in(85,86,88);       -- in表示或者关系
+```
+6. 查询student表中“95031”班或者性别为“女”的同学记录  
+```sql
+  select * from student where class='95031' or ssex='女';      -- or表示不同字段的或者关系
+```
+7. 以class降序查询student表的所有记录  
+```sql
+  select * student order by class desc;       -- order by 。。。desc 表示降序(asc表示升序，默认也是升序)
+```
+8. 以cno升序、degree降序查询score表的所有记录  
+```sql
+  select * from student order by cno asc,degree desc;      -- 可以用逗号并列起来
+```
+9. 查询“95031”班的学生人数  
+```sql
+  select count(*) from student where class='95031';       -- count表示统计
+```
+10. 查询score表中的最高分的学生学号和课程号。（子查询或者排序）
+```sql  
+  select sno,cno from score where degree=(select max(degree) from score);     -- 嵌套
+```
+
+
+
+
 
