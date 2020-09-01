@@ -524,10 +524,12 @@ Score
   insert into score values('105','6-166','79');
   insert into score values('109','6-166','81');
 ```
-———— 查询学生表里的所有数据
+1. 查询学生表里的所有记录
 ```sql
   select * from student;
 ```
+2. 查询student表中的所有记录的sname、ssex和class列
+
 
 
 
