@@ -347,7 +347,44 @@
   insert into student3 values(2,'李四','中国','四川省','成都市','武侯区京城大道200号');
   insert into student3 values(3,'王五','中国','四川省','成都市','高新区天府大道90号');
 ```
-
+注：范式设计得越详细，对于某些实际操作可能更好，但是不一定都是好处。  
+   
+2. 第二范式  
+必须是满足第一范式的前提下，第二范式要求，除主键外的每一列都必须完全依赖于主键。  
+如果要出现不完全依赖，只可能发生在联合主键的情况下。  
+———— 创建一个订单表  
+```sql
+  create table myorder(
+      product_id int,
+      customer_id int,
+      product_name varchar(20),
+      customer_name varchar(20),
+      primary key(product_id,customer_id)
+  );
+```
+这里出现的问题：  
+————除主键以外的其他列，只依赖于主键的部分字段。（比如这里的product_name只依赖于product_id）  
+   
+如何解决：
+————拆表
+```sql
+  create table myorder(
+      order_id int primary key,
+      product_id int,
+      customer_id int,
+  );
+  
+  create table product(
+      id int primary key,
+      name varchar(20)
+  );
+  
+  create table customer(
+      id int primary key,
+      name varchar(20)
+  );
+```  
+————分成三个表之后，就满足了第二范式的设计！
 
 
 
