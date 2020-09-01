@@ -410,13 +410,88 @@
       phone varchar(15)
   );
 ```
+## 八、查询练习  
+*** 学生表 ***  
+```
+Student  
+学号   
+姓名   
+性别    
+出生年月日  
+所在班级  
+```
+```sql
+  create database selectTest;
+  use selectTest;
+  create table Student(
+      sno varchar(20) primary key,
+      sname varchar(20) not null,
+      ssex varchar(10) not null,
+      sbirthday datetime,
+      class varchar(20)
+  );
+```
+   
+*** 教师表 ***   
+```
+Teacher
+教师编号
+教师名字
+教师性别
+出生年月日
+职称
+所在部门
+```
+```sql
+  create table Teacher(
+      tno varchar(20) primary key,
+      tname varchar(20) not null,
+      tsex varchar(10) not null,
+      tbirthday datetime,
+      prof varchar(20)
+  );
+``` 
+   
+*** 课程表 ***  
+```
+Course  
+课程号  
+课程名称  
+教师编号  
+```  
+```sql
+  create table Course(
+      cno varchar(20) primary key,
+      cname varchar(20) not null,
+      tno varchar(20) not null,
+      foreign key(tno) references Teacher(tno)
+  );
+```
+
+*** 成绩表 ***
+```
+Score  
+学号  
+课程号  
+成绩  
+```
+```sql
+  create table score(
+      sno varchar(20) primary key,
+      cno varchar(20) not null,
+      degree decimal,
+      foreign key(sno) references Student(sno),
+      foreign key(cno) references Course(cno)
+  );
+```
 
 
-   
-   
-   
-   
-   
-   
-   
+
+
+
+
+
+
+
+
 
