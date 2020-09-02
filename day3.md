@@ -157,6 +157,104 @@ Score
 ```sql  
   select sno,cno from score where degree=(select max(degree) from score);     -- 嵌套
 ```
+（1）找到最高分  
+```sql
+  select max(degree) from score;
+```
+（2）找到最高分的 sno 和 cno  
+```sql
+  select sno,cno from score where degree=(select max(degree) from score);
+```
+（3）另一种方法：排序的做法   
+```sql
+  select sno,cno from score order by degree desc limit 0,1;       -- limit 0,1 表示从0开始，查找1条
+```  
+11. 查询每门课的成绩  
+* 得知道有多少门课
+```sql
+  select * from course;
+```  
+* 计算3-105课程的平均成绩  
+```sql
+  select avg(degree) from score where cno='3-105';
+```  
+* 计算每门课程的平均成绩  
+```sql
+  select cno,avg(degree) from score group by cno;      -- group by cno 表示按照课程号分组
+```
+12. 查询 score 表中至少有2名学生选修，并以3开头的课程的平均分数
+* 哪些课程至少有两名学生选修，并且以3开头
+```sql
+  select cno from score group by cno
+       having count(cno)>=2 and like '3%';
+```   
+* 查询至少两名学生选修，并且以3开头的课程的平均成绩  
+```sql
+  select cno,avg(degree) from score
+       group by cno
+       having count(cno)>=2
+       and cno like '3%';
+```
+* 还可以再添加一列查询这门课程有几个人  
+```sql
+  select cno,avg(degree),count(*) from score
+       group by cno        -- group by 分组
+       having count(cno)>=2        -- having 开条件
+       and cno like '3%';       -- like 模糊查询
+```
+13. 查询分数大于70，小于90的 sno 列
+* 方法一
+```sql
+  select sno,degree from score
+       where degree>70 and degree<90;
+```
+* 方法二
+```sql
+  select sno,degree from score
+       where degree between 70 and 90;
+```
+14. 查询所有学生的 sname、cno 和 degree 列
+* 分析：这里涉及 student 表以及 score 表
+```sql
+  select sno,sanme from student;
+  select sno,cno,degree from score;
+```
+* 多表查询（总）
+```sql
+  select sname,cno,degree from student,score
+       where student.sno=score.sno;
+```
+15. 查询所有学生的 sno、cname 和 degree 列
+* 分析：这里涉及到 course、score 表
+```sql
+  select cno,cname from course;
+  select cno,sno,degree from score;
+```
+* 多表查询（总）
+```sql
+  select sno,cname,degree from course,score
+       where course.cno = score.cno;
+```
+16. 查询所有学生的 sname、cname 和 degree 列
+* 分析：sanme -> student, cname -> course, degree -> score  多表查询
+```sql
+  select sname,cname,degree,student.sno,course.cno from student,course,score
+       where student.sno = score.sno
+       and course.cno = score.cno;
+```
+* 为了方便查看，还可以给 sno 和 cno 取个别名
+```sql
+  select sname,cname,degree,student.sno as stu_sno,course.cno as cou_cno from student,course,score
+       where student.sno = score.sno
+       and course.cno = score.cno;
+```
+17. 查询“95031”班学生每门课的平均分
+* 查询“95031”班的学生信息
+```sql
+  select * from student where calss='95031';
+```
+
+
 
 
 
