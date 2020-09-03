@@ -86,6 +86,7 @@ Score
   insert into student values('107','王尼玛','男','1976-02-20','95033');
   insert into student values('108','张全蛋','男','1975-02-18','95031');
   insert into student values('109','赵铁柱','男','1974-06-03','95031');
+  insert into student values('110','张飞','男','1974-06-03','95038');
 ```
 ———— 添加教师信息
 ```sql
@@ -102,15 +103,18 @@ Score
 ```
 ———— 添加成绩表
 ```sql
-  insert into score values('103','3-245','86');
-  insert into score values('105','3-245','75');
-  insert into score values('109','3-245','68');
+  insert into score values('101','3-105','90');
+  insert into score values('102','3-105','91');
+  insert into score values('104','3-105','89');
   insert into score values('103','3-105','92');
   insert into score values('105','3-105','88');
   insert into score values('109','3-105','76');
   insert into score values('103','6-166','85');
   insert into score values('105','6-166','79');
   insert into score values('109','6-166','81');
+  insert into score values('103','3-245','86');
+  insert into score values('105','3-245','75');
+  insert into score values('109','3-245','68');
 ```  
    
    
@@ -249,10 +253,152 @@ Score
        and course.cno = score.cno;
 ```
 17. 查询“95031”班学生每门课的平均分
-* 查询“95031”班的学生信息
+* 查询“95031”班的学生学号
 ```sql
-  select * from student where calss='95031';
+  select sno from student where calss='95031';
 ```
+* 从成绩表中查询学号为“95031”班的学生的成绩信息
+```sql
+  select * from score 
+       where sno in(select sno from student where calss='95031');
+```
+* 查询“95031”班学生每门课的平均分
+```sql
+  select cno,avg(degree) from score 
+       where sno in(select sno from student where calss='95031')
+       group by cno;
+```
+18. 查询选修“3-105”课程的成绩高于“109”号同学“3-105”成绩的所有的学生记录    （子查询）
+* 查询“109”号同学选修“3-105”课程的成绩
+```sql
+  select degree from score where sno='109' and cno='3-105';
+```
+* 查询成绩表中选修“3-105”课程的成绩高于“109”号同学“3-105”成绩的所有记录
+```sql
+  select * from score 
+       where cno='3-105'
+       and degree>(select degree from score where sno='109' and cno='3-105');
+```
+19. 查询成绩高于学号为“109”、课程号为“3-105”的成绩的所有记录   （子查询）
+```sql
+  select * from score 
+       where degree>(select degree from score where sno='109' and cno='3-105');
+```
+20. 查询和学号为108、101的同学同年出生的所有学生的 sno、sname 和 sbirthday 列       （year 函数与带 in 关键字的子查询）
+* 查询学号为108、101同学的出生年份
+```sql
+  select year(sbirthday) from student where sno in(108,101);        -- year 函数提取年份
+```
+* 查询和学号为108、101的同学同年出生的所有学生
+```sql
+  select * from student
+       where year(sbirthday) in (select year(sbirthday) from student where sno in(108,101));       -- 年份相同
+```
+* 查询和学号为108、101的同学同年出生的所有学生的 sno、sname 和 sbirthday 列 
+```sql
+  select sno,sname,sbirthday from student
+       where year(sbirthday) in (select year(sbirthday) from student where sno in(108,101));       -- 年份相同
+```
+21. 查询“张旭”教师任课的学生成绩    （多层嵌套子查询）
+* 查询“张旭”教师的教师号
+```sql
+  select tno from teacher where tname='张旭';
+```
+* 查询“张旭”教师任职的那门课的课程号
+```sql
+  select cno from course where tno in (select tno from teacher where tname='张旭');
+```
+* 从成绩表中查询“张旭”教师任课的学生成绩
+```sql
+  select * from score where cno in (select cno from course where tno=(select tno from teacher where tname='张旭'));
+```
+22. 查询选修某课程的同学人数多于5人的教师姓名   （多表查询）
+* 先通过课程号分组查看成绩表中的课程编号
+```sql
+  select cno from score group  by cno;
+```
+* 查询选修人数超过5人的课程号
+```sql
+  select cno from score group by cno having count(*)>5;        -- having 在 group by 后面用于过滤条件
+```
+* 在课程表里查询选修人数超过5人的教师号
+```sql
+  select tno from score where cno=(select cno from score group by cno having count(*)>5);
+```
+* 在教师表里查询选修人数超过5人的教师姓名
+```sql
+  select tname from teacher where tno=(select tno from score where cno=(select cno from score group by cno having count(*)>5));
+```
+** 这里 = 换成 in 更具代表性 **
+23. 查询95033班和95.31班全体学生的记录
+```sql
+  select * from student where class in (95031,95031);     -- in 表示或者关系
+```
+24. 查询存在有85分以上成绩的课程 cno、degree
+```sql
+  select cno,degree from score where degree>85;
+```
+25. 查询出“计算机系”教师所教课程的成绩表
+* 在教师表里查询计算机系的教师的教师号
+```sql
+  select tno from teacher where depart='计算机系';
+```
+* 在课程表里查询计算机系的教师的课程号
+```sql
+  select cno from course where tno in (select tno from teacher where depart='计算机系');
+```
+* 在成绩表里查询“计算机系”教师所教课程的成绩
+```sql
+  select * from score where cno in (select cno from course where tno in (select tno from teacher where depart='计算机系'));
+```
+26. 查询“计算机系”与“电子工程系”不同职称的教师的 tname 和 prof     （union 和 not in 的使用）
+* 查询电子工程系教师的职称
+```sql
+  select prof from teacher where depart='电子工程系';
+```
+* 查询计算机系与电子工程与电子工程系不同职称的教师的 tname 和 prof
+```sql
+   select prof from teacher where depart='计算机系' and prof not in (select prof from teacher where depart='电子工程系')
+   union        -- 求并集 
+   select prof from teacher where depart='电子工程系' and prof not in (select prof from teacher where depart='计算机系')
+```
+27. 查询选修编号为“3-105”课程，且成绩至少高于选修编号为“3-245”的同学的 cno、sno 和 degree，并且 degree 从高到低次序排列
+* 分别查询选修“3-245”和选修“3-105”的成绩
+```sql
+  select * from score where cno='3-245';
+  select * from score where cno='3-105';
+```
+* 至少？  大于“3-245”其中至少一个，降序
+```sql
+ select cno,sno,degree from score 
+      where cno='3-105' 
+      and degree>any(select * from score where cno='3-245')      -- any 表示任意一个
+      order by degree desc;        -- 降序
+```
+28. 查询编号为“3-105”且成绩高于选修“3-245”课程的同学的 cno、sno 和 degree
+* 且？  高于任何一个（每一个）
+```sql
+ select cno,sno,degree from score 
+      where cno='3-105' 
+      and degree>all(select * from score where cno='3-245');        -- all 表示所有
+```
+29. 查询所有教师和同学的 name、sex 和 birthday，然后并起来，并取别名
+* 分别查询所有教师和同学的 name、sex 和 birthday，然后并起来，并取别名
+```sql
+  select tname as name,tsex as sex,tbirthday as birthday from teacher
+  union
+  select sname,ssex,sbirthday from student;
+```
+30. 查询所有“女”教师和“女”同学的 name、sex 和 birthday
+```sql
+  select tname as name,tsex as sex,tbirthday as birthday from teacher where tsex='女'
+  union
+  select sname,ssex,sbirthday from student where ssex='女';
+```
+
+
+
+
 
 
 
