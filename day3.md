@@ -395,6 +395,12 @@ Score
   union
   select sname,ssex,sbirthday from student where ssex='女';
 ```
+31. 查询成绩比该课程平均成绩低的同学的   （复制表数据做条件查询）
+* 先查询各门课程的平均成绩
+```sql
+  select cno,avg(degree) from score group by cno;
+```
+* 将 score 表里的内容复制一份儿
 
 
 
