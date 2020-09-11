@@ -400,8 +400,13 @@ Score
 ```sql
   select cno,avg(degree) from score group by cno;
 ```
-* 将 score 表里的内容复制一份儿
-
+* 将 score 表里的内容复制一份儿，现在有两份儿一个是 a 表一个是 b 表
+```sql
+  select * from score a 
+       where degree < (select avg(degree) from score b where a.cno = b.cno);
+       -- where 之后的表示如果 a 表中筛选出3-105，90那么就可以从 b 表中筛选出3-105，“平均值”与之对应
+```
+32. 
 
 
 
