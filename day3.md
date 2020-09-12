@@ -451,9 +451,53 @@ Score
 ```sql
   select max(sbirthday) as '最大',min(sbirthday) as '最小' from student;
 ```
-
-
-
+37. 以班号和年龄从大到小的顺序查询 students 表中的全部记录
+```sql
+  select * from student order by class desc,sbirthday;
+```
+38. 查询“男”教师及其所上的课程
+```sql
+  select * from course where tno in (select tno from teacher where ssex='男');
+```
+39. 查询最高分同学的 sno、cno 和 degree 列
+```sql
+  select * from score where degree = (select max(degree) from score);
+```
+40. 查询和“李军”同性别的所有同学的 sanme
+```sql
+  select sname from student 
+    where ssex=(select ssex from student where sname='李军');
+```
+41. 查询和“李军”同性别并且同班的同学的 sname
+```sql
+  select sname from student 
+    where ssex=(select ssex from student where sname='李军')
+    and class=(select class from student where sname='李军';
+```
+42. 查询所有选修“计算机导论”课程的“男”同学的成绩表
+```sql
+  select * from score 
+    where cno in (select cno from course where cname='计算机导论')
+    and sno in (select sno from student where ssex='男');
+```
+43. 假设使用如下命令建立了一个 grade 表：        （按等级查询）
+```sql
+  create table grade(
+      low int(3),
+      upp int(3),
+      grade char(1)
+  );
+  insert into grade values(90,100,'A');
+  insert into grade values(80,89,'B');
+  insert into grade values(70,79,'C');
+  insert into grade values(60,69,'D');
+  insert into grade values(0,59,'E');
+  
+  -- 现查询所有同学的 sno、cno 和 grade 列。
+```
+```sql
+  select sno,cno,grade from score,grade where degree between low and upp;    -- 只需要 where degree betweeen low and upp 就可以
+```
 
 
 
