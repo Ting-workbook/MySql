@@ -406,7 +406,57 @@ Score
        where degree < (select avg(degree) from score b where a.cno = b.cno);
        -- where 之后的表示如果 a 表中筛选出3-105，90那么就可以从 b 表中筛选出3-105，“平均值”与之对应
 ```
-32. 
+32. 查询所有任课教师的 tanme 和 depart 
+* course 表里安排了课程，从此表中取出 tno
+```sql
+  select tno from course;
+```
+* 查询在 course 表中出现教师信息的老师的信息 （表示这些老师是任课教师）
+```sql
+  select * from teacher where tno in (select tno from course);
+```
+```sql
+  select tname,depart from teacher
+    where  tno in (select tno from course);
+```
+33. 查询至少有2名男生的班号    （条件加分组筛选）
+* 先按照分组查询每个班的男生数，并且男生数要大于1
+```sql
+  select cno from student 
+    where ssex='男'
+    group by class
+    having count(*)>1;
+```
+34. 查询表中不姓“王”的同学的记录
+```sql
+  select * from student
+    where saname not like '王%';
+```
+35. 查询 student 表中每个学生的姓名和年龄     （ year 函数的运用 ）
+* 注：年龄 = 当前年份 - 出生年份
+```sql
+  select year(now()) from student;      -- year(now()) 查询当前年份
+  select year(sbirthday) from student;      -- year(now()) 查询出生年份
+```
+```sql
+  select sname,year(now())-year(sbirthday) as '年龄' from student; 
+```
+36. 查询 student 表中最大和最小的 sbirthday 日期值
+* 先按照从小到大的生日顺序排序
+```sql
+  select sbirthday froom student 
+    order by sbirthday;
+```
+* 查询 student 表中最大和最小的 sbirthday 日期值
+```sql
+  select max(sbirthday) as '最大',min(sbirthday) as '最小' from student;
+```
+
+
+
+
+
+
 
 
 
