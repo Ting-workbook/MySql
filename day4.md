@@ -49,9 +49,14 @@ name
   insert into card values(4,'工商卡');
   insert into card values(5,'邮政卡');
 ```
-#####  注：这里并没有创建外键 #####
-##
-
+##### 注：这里并没有创建外键 #####
+## 1、inner join 查询 （内连接）
+```sql
+  select * from person inner join card on person.cardId=card.id;    
+  -- 内连查询，其实就是两张表中的数据，通过某个字段相等，查询出相关记录数据。（ 把inner join 改成 join 得到的解雇哦 也是一样的 ）
+  -- 此时 person 表里的“王五”就没有被查询出来
+```
+## 2、left join 查询 （左外连接）
 
 
 
