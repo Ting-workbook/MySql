@@ -53,10 +53,37 @@ name
 ## 1、inner join 查询 （内连接）
 ```sql
   select * from person inner join card on person.cardId=card.id;    
-  -- 内连查询，其实就是两张表中的数据，通过某个字段相等，查询出相关记录数据。（ 把inner join 改成 join 得到的解雇哦 也是一样的 ）
+  -- 内连查询，其实就是两张表中的数据，通过某个字段相等，查询出相关记录数据。（ 把inner join 改成 join 得到的结果也是一样的 ）
   -- 此时 person 表里的“王五”就没有被查询出来
 ```
 ## 2、left join 查询 （左外连接）
+```sql
+  select * from person left join card on person.cardId=card.id;
+  --  左外连接，会把左边表格里的所有数据取出来，而右边表格的数据，如果有相等的就显示出来，如果没有就会补NULL
+```
+```sql
+  select * from person left outer join card on person.cardId=card.id;
+  -- 和上面的结果是一样的
+```
+## 3、right jion 查询 （右外连接）
+```sql
+  select * from person right join card on person.cardId=card.id;
+  --  右外连接，会把右边表格里的所有数据取出来，而左边表格的数据，如果有相等的就显示出来，如果没有就会补NULL
+```
+```sql
+  select * from person right outer join card on person.cardId=card.id;
+  -- 和上面的结果是一样的
+```
+## full join 查询 （全外连接）
+##### 注：MySQL 是不支持全外连接的 #####
+```sql
+  select * from person left join card on person.cardId=card.id
+  union
+  select * from person right join card on person.cardId=card.id;
+  -- mysql 中的全外连接只能将左外连接和右外连接合在一起
+```
+
+
 
 
 
