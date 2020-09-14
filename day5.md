@@ -12,7 +12,7 @@ MySQL 中事务其实是一个最小的不可分割的工作单元，事务能�
 ```
 ##### 多条 sql 语句，可能会有同时成功的要求，要么就同时失败。 #####
 
-## 如何控制事务commit_rollback
+## 如何控制事务commit、rollback
 1. 默认是开启事务的（自动提交）。
 ```sql
   select @@autocommit;
@@ -60,6 +60,22 @@ MySQL 中事务其实是一个最小的不可分割的工作单元，事务能�
 ```
 ##### 事务给我们提供一个反悔的机会 #####
 ##### 如果觉得没有问题不需要修改可以提交了的话，可以手动commit ######
+## 手动开启事务 begin、start transaction
+##### “ begin; ”或者“ start transaction; ”都可以帮我们手动开启一个事务 #####
+* 还原 autocommit 的默认值
+```sql
+  set autocommit=1;
+```
+```sql
+  select * from user;
+```
+* 结果如下：
+| id | name | money |
+| ---- | ---- | ---- |
+| 1 | a | 1000 |
+| 2 | b | 1000 |
+* 转账
+
 
 
 
